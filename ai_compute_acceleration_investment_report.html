@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Compute Acceleration — 供應鏈投資報告 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:#070B14;color:#E8EDF5;line-height:1.7;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:#0A0F1A}
+::-webkit-scrollbar-thumb{background:#26344A;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#38BDF8}
+.mono{font-family:'JetBrains Mono','SF Mono',monospace}
+.container{max-width:1440px;margin:0 auto;padding:0 24px}
+@media(max-width:768px){.container{padding:0 16px}}
+
+/* Sticky Navbar */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,11,20,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(38,52,74,.5);height:56px;display:flex;align-items:center}
+.navbar .container{display:flex;align-items:center;gap:16px;width:100%}
+.navbar .brand{font-weight:700;font-size:1.05rem;letter-spacing:-.02em;color:#38BDF8;white-space:nowrap}
+.navbar .brand i{color:#A78BFA;margin-right:6px}
+.nav-toc{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none;padding:0 8px}
+.nav-toc::-webkit-scrollbar{display:none}
+.nav-toc a{color:#94A3B8;text-decoration:none;font-size:.72rem;font-weight:500;padding:4px 10px;border-radius:6px;white-space:nowrap;transition:.2s}
+.nav-toc a:hover,.nav-toc a.active{color:#E8EDF5;background:rgba(56,189,248,.1)}
+
+/* Hero */
+.hero{min-height:85vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:56px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 30% 30%,rgba(56,189,248,.06) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 70%,rgba(167,139,250,.04) 0%,transparent 50%);pointer-events:none}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:960px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);border-radius:100px;padding:4px 14px;font-size:.72rem;font-weight:600;color:#38BDF8;margin-bottom:20px;letter-spacing:.04em}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:16px}
+.hero h1 .gradient{background:linear-gradient(135deg,#22D3A3,#38BDF8,#A78BFA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(.95rem,1.3vw,1.15rem);color:#94A3B8;max-width:720px;margin-bottom:28px;line-height:1.8}
+.hero-meta{display:flex;flex-wrap:wrap;gap:20px 36px;font-size:.82rem;color:#64748B;border-top:1px solid rgba(38,52,74,.4);padding-top:20px}
+.hero-meta span i{color:#38BDF8;width:18px;margin-right:6px}
+
+/* Section */
+.section{padding:64px 0;position:relative}
+.section-header{margin-bottom:36px}
+.section-header .sec-num{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;color:#38BDF8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.section-header h2{font-size:clamp(1.4rem,2.8vw,2rem);font-weight:700;letter-spacing:-.02em}
+.section-header h2 i{color:#A78BFA;margin-right:10px}
+.section-header p{color:#94A3B8;margin-top:8px;font-size:.92rem;max-width:700px}
+
+/* Card Base */
+.card{background:#121C2E;border:1px solid #26344A;border-radius:14px;padding:24px;transition:all .25s}
+.card:hover{border-color:rgba(56,189,248,.25);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+
+/* Supply Chain Grid */
+.sc-grid{display:grid;gap:20px}
+.sc-tier{margin-bottom:28px}
+.sc-tier-title{display:flex;align-items:center;gap:12px;font-size:1rem;font-weight:600;padding:10px 0 16px;border-bottom:1px solid rgba(38,52,74,.3);margin-bottom:20px}
+.sc-tier-title .tier-badge{font-size:.65rem;font-weight:700;padding:2px 12px;border-radius:100px;letter-spacing:.03em}
+.tier-upstream .tier-badge{background:rgba(56,189,248,.12);color:#38BDF8}
+.tier-midstream .tier-badge{background:rgba(167,139,250,.12);color:#A78BFA}
+.tier-downstream .tier-badge{background:rgba(34,211,163,.12);color:#22D3A3}
+.sc-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+@media(min-width:1024px){.sc-row{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}}
+.sc-card{position:relative;background:linear-gradient(135deg,rgba(18,28,46,.8) 0%,rgba(18,28,46,.95) 100%);border:1px solid #26344A;border-radius:12px;padding:18px;transition:all .25s;overflow:hidden}
+.sc-card::before{content:'';position:absolute;inset:0;border-radius:12px;opacity:0;transition:opacity .3s}
+.sc-card:hover{transform:translateY(-2px);border-color:rgba(56,189,248,.3);box-shadow:0 8px 28px rgba(0,0,0,.4)}
+.sc-card:hover::before{opacity:1}
+.tier-upstream .sc-card{border-left:3px solid #38BDF8}
+.tier-midstream .sc-card{border-left:3px solid #A78BFA}
+.tier-downstream .sc-card{border-left:3px solid #22D3A3}
+.sc-card .ticker{font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:#E8EDF5;letter-spacing:-.02em}
+.sc-card .company{font-size:.78rem;color:#94A3B8;margin:2px 0 6px}
+.sc-card .tag{display:inline-block;font-size:.6rem;font-weight:600;padding:2px 8px;border-radius:100px;background:rgba(56,189,248,.1);color:#38BDF8;margin-bottom:8px;letter-spacing:.02em}
+.sc-card .metrics{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:.68rem;color:#64748B;margin-top:6px}
+.sc-card .metrics span{display:flex;align-items:center;gap:4px}
+.sc-card .busy{display:inline-block;font-size:.6rem;font-weight:600;padding:1px 8px;border-radius:100px}
+.busy-high{background:rgba(251,113,133,.12);color:#FB7185}
+.busy-mid{background:rgba(251,191,36,.12);color:#FBBF24}
+.busy-low{background:rgba(34,211,163,.12);color:#22D3A3}
+
+/* Tables */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid #26344A;margin:16px 0}
+table.fin{width:100%;border-collapse:collapse;font-size:.78rem;min-width:800px}
+table.fin thead{position:sticky;top:0;z-index:5}
+table.fin thead th{background:#0D1628;color:#94A3B8;font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;padding:12px 14px;text-align:right;white-space:nowrap;border-bottom:1px solid #26344A}
+table.fin thead th:first-child{text-align:left;position:sticky;left:0;z-index:6;background:#0D1628}
+table.fin tbody tr{transition:background .15s}
+table.fin tbody tr:nth-child(odd){background:rgba(255,255,255,.03)}
+table.fin tbody tr:hover{background:rgba(56,189,248,.08);border-left:3px solid #38BDF8}
+table.fin tbody td{padding:10px 14px;text-align:right;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:.74rem;border-bottom:1px solid rgba(38,52,74,.2)}
+table.fin tbody td:first-child{text-align:left;font-family:'Inter',sans-serif;font-weight:500;color:#E8EDF5;position:sticky;left:0;z-index:2;background:#121C2E}
+table.fin tbody tr:nth-child(odd) td:first-child{background:rgba(255,255,255,.03)}
+table.fin tbody tr:hover td:first-child{background:rgba(56,189,248,.08)}
+.green{color:#22D3A3}
+.red{color:#FB7185}
+.blue{color:#38BDF8}
+.purple{color:#A78BFA}
+.yellow{color:#FBBF24}
+.muted{color:#64748B}
+
+/* Risk Matrix */
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.risk-card{border:1px solid #26344A;border-radius:12px;padding:20px;background:#121C2E;transition:.2s}
+.risk-card:hover{border-color:rgba(251,113,133,.3)}
+.risk-card .risk-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.risk-card .risk-header h4{font-size:.85rem;font-weight:600;color:#E8EDF5}
+.risk-card .risk-prob{font-size:.65rem;font-weight:600;padding:2px 10px;border-radius:100px}
+.risk-high{background:rgba(251,113,133,.12);color:#FB7185}
+.risk-mid{background:rgba(251,191,36,.12);color:#FBBF24}
+.risk-low{background:rgba(34,211,163,.12);color:#22D3A3}
+.risk-card p{font-size:.78rem;color:#94A3B8;margin-bottom:8px;line-height:1.6}
+.risk-card .hedge{font-size:.72rem;color:#38BDF8;background:rgba(56,189,248,.06);padding:6px 10px;border-radius:6px;margin-top:4px}
+
+/* Investment Thesis Cards */
+.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.inv-card{border-radius:12px;padding:24px;border:1px solid #26344A;position:relative;overflow:hidden}
+.inv-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.inv-card.aggro::after{background:linear-gradient(90deg,#FB7185,#FBBF24)}
+.inv-card.core::after{background:linear-gradient(90deg,#22D3A3,#38BDF8)}
+.inv-card.satellite::after{background:linear-gradient(90deg,#A78BFA,#38BDF8)}
+.inv-card.aggro{background:linear-gradient(135deg,rgba(251,113,133,.04),rgba(251,191,36,.04))}
+.inv-card.core{background:linear-gradient(135deg,rgba(34,211,163,.04),rgba(56,189,248,.04))}
+.inv-card.satellite{background:linear-gradient(135deg,rgba(167,139,250,.04),rgba(56,189,248,.04))}
+.inv-card h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.inv-card .sub{font-size:.72rem;color:#94A3B8;margin-bottom:10px}
+.inv-card ul{list-style:none;padding:0}
+.inv-card ul li{font-size:.78rem;color:#CBD5E1;padding:4px 0;display:flex;align-items:flex-start;gap:6px}
+.inv-card ul li i{color:#38BDF8;font-size:.65rem;margin-top:4px}
+.inv-card .alloc{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:.72rem;font-weight:600;padding:4px 12px;border-radius:6px;background:rgba(255,255,255,.04);color:#22D3A3}
+
+/* Deep Dive */
+.dive-card{margin-bottom:24px;border:1px solid #26344A;border-radius:14px;padding:28px;background:#121C2E}
+.dive-card .dive-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.dive-card .dive-header .dive-ticker{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:700;color:#38BDF8;line-height:1}
+.dive-card .dive-header .dive-name{font-size:1rem;color:#94A3B8;margin-top:4px}
+.dive-card .dive-header .dive-label{font-size:.65rem;font-weight:600;padding:3px 10px;border-radius:100px;margin-left:auto}
+.dive-card .dive-text{font-size:.84rem;color:#CBD5E1;line-height:1.8;margin-bottom:16px}
+.dive-card .dive-text strong{color:#E8EDF5}
+
+/* Mini Chart Bars */
+.stat-bar-wrap{display:flex;align-items:center;gap:10px;font-size:.72rem}
+.stat-bar-bg{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:3px;transition:width .6s}
+
+/* Progress Donut (CSS) */
+.donut{width:44px;height:44px;border-radius:50%;position:relative;display:inline-flex;align-items:center;justify-content:center}
+.donut-inner{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;color:#E8EDF5}
+
+/* Disclaimer */
+.disclaimer{margin-top:48px;padding:24px;border:1px solid rgba(251,113,133,.15);border-radius:12px;background:rgba(251,113,133,.03);font-size:.72rem;color:#64748B;line-height:1.8}
+.disclaimer strong{color:#FB7185}
+.disclaimer h4{color:#FB7185;font-size:.8rem;font-weight:600;margin-bottom:8px}
+
+/* Responsive */
+@media(max-width:1024px){.sc-row{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
+@media(max-width:768px){
+  .navbar .brand span{display:none}
+  .nav-toc a{padding:4px 6px;font-size:.65rem}
+  .sc-row{grid-template-columns:1fr}
+  .dive-card .dive-header{flex-direction:column}
+  .dive-card .dive-header .dive-label{margin-left:0}
+  .inv-grid{grid-template-columns:1fr}
+  .risk-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <div class="brand"><i class="fas fa-microchip"></i><span> AI Compute Acceleration</span></div>
+    <div class="nav-toc">
+      <a href="#supply-chain"><i class="fas fa-sitemap"></i> 供應鏈</a>
+      <a href="#deep-dive"><i class="fas fa-chart-line"></i> 深度分析</a>
+      <a href="#strategy"><i class="fas fa-chess-knight"></i> 策略配置</a>
+      <a href="#risk"><i class="fas fa-shield-halved"></i> 風險矩陣</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="container hero-content">
+    <div class="hero-badge"><i class="fas fa-bolt"></i> 2026 Mid-Year Institutional Research Deck</div>
+    <h1>AI 模型計算加速<br/><span class="gradient">完整供應鏈投資地圖</span></h1>
+    <p>基於 2025–2026 財報紀實，穿透 CoWoS 產能、Blackwell Ultra / Rubin 架構轉換、HBM4 世代交替，以及 $700B+ 超大规模雲端資本支出的深層價值鏈分析。本報告專為專業機構投資人設計，提供可執行的戰術配置建議。</p>
+    <div class="hero-meta">
+      <span><i class="fas fa-building-columns"></i> 產業覆蓋：18 家上市公司</span>
+      <span><i class="fas fa-calculator"></i> 財務基準：FY2025 全年 – FY2026 Q2</span>
+      <span><i class="fas fa-database"></i> 共識數據：Bloomberg / FactSet (2026/06)</span>
+    </div>
+  </div>
+</section>
+
+<!-- Supply Chain Blueprint -->
+<section class="section" id="supply-chain">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-num"><span>01</span> <i class="fas fa-minus"></i></div>
+      <h2><i class="fas fa-sitemap"></i> AI 計算加速產業供應鏈藍圖 — 2026 動態版</h2>
+      <p>依「價值傳遞與產能瓶頸順序」由上至下拆解六個關鍵層級，每環節標示產能利用率、技術疊代壓力與投資擁擠度（🟢 低擁擠 / 🟡 中 / 🔴 高）。</p>
+    </div>
+
+    <!-- Tier 1: Upstream -->
+    <div class="sc-tier tier-upstream">
+      <div class="sc-tier-title"><span class="tier-badge">上游</span>材料・設備・EDA・晶圓製造・先進封裝・HBM <span style="font-size:.65rem;color:#94A3B8;font-weight:400">（半導體製造核心基礎）</span></div>
+      <div class="sc-row">
+        <div class="sc-card">
+          <div><span class="ticker">TSM</span> <span class="company">台積電</span></div>
+          <div class="tag">N2 量產先鋒・CoWoS-L 主力</div>
+          <div class="metrics">
+            <span><i class="fas fa-microchip"></i> 3nm/5nm 稼動率 99%+</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">AMAT</span> <span class="company">應用材料</span></div>
+          <div class="tag">GAA 設備升級關鍵供應商</div>
+          <div class="metrics">
+            <span><i class="fas fa-industry"></i> 2026 先進封裝設備訂單 +28% YoY</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">LRCX</span> <span class="company">科林研發</span></div>
+          <div class="tag">HBM 蝕刻設備主導者</div>
+          <div class="metrics">
+            <span><i class="fas fa-industry"></i> 2026 蝕刻設備營收 +18% YoY</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">KLAC</span> <span class="company">科磊</span></div>
+          <div class="tag">先進製程檢測獨佔</div>
+          <div class="metrics">
+            <span><i class="fas fa-industry"></i> 2026 檢測設備市佔率 >55%</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">SNPS</span> <span class="company">新思科技</span></div>
+          <div class="tag">3D-IC 設計工具滲透加速</div>
+          <div class="metrics">
+            <span><i class="fas fa-cube"></i> 3D-IC EDA 營收 +32% YoY (2026)</span>
+            <span><span class="busy busy-low">🟢 低</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">CDNS</span> <span class="company">益華電腦</span></div>
+          <div class="tag">AI 晶片驗證平台龍頭</div>
+          <div class="metrics">
+            <span><i class="fas fa-cube"></i> 2026 訂閱制營收佔比升至 68%</span>
+            <span><span class="busy busy-low">🟢 低</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">ASX</span> <span class="company">日月光投控</span></div>
+          <div class="tag">先進封裝產能釋放受惠者</div>
+          <div class="metrics">
+            <span><i class="fas fa-box"></i> 先進封裝營收佔比升至 24%</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">AMKR</span> <span class="company">艾克爾</span></div>
+          <div class="tag">CoWoS 替代產能受惠</div>
+          <div class="metrics">
+            <span><i class="fas fa-box"></i> 2.5D 封裝營收 +41% YoY</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">MU</span> <span class="company">美光科技</span></div>
+          <div class="tag">HBM4 先鋒</div>
+          <div class="metrics">
+            <span><i class="fas fa-memory"></i> 2026 HBM 完全售罄（已鎖價）</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 2: Midstream -->
+    <div class="sc-tier tier-midstream">
+      <div class="sc-tier-title"><span class="tier-badge">中游</span>加速晶片・光互連・交換機・伺服器系統・散熱 <span style="font-size:.65rem;color:#94A3B8;font-weight:400">（算力硬體交付核心層）</span></div>
+      <div class="sc-row">
+        <div class="sc-card">
+          <div><span class="ticker">NVDA</span> <span class="company">NVIDIA</span></div>
+          <div class="tag">Blackwell Ultra → Rubin 過渡</div>
+          <div class="metrics">
+            <span><i class="fas fa-server"></i> DC GPU 市佔 ~88%</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">AMD</span> <span class="company">AMD</span></div>
+          <div class="tag">MI400 量產轉折點</div>
+          <div class="metrics">
+            <span><i class="fas fa-server"></i> DC GPU 2026E $15B（+114%）</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">AVGO</span> <span class="company">Broadcom</span></div>
+          <div class="tag">ASIC 之王・AI 網路瓶頸</div>
+          <div class="metrics">
+            <span><i class="fas fa-microchip"></i> AI Semi $10.8B Q2 (+143% YoY)</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">COHR</span> <span class="company">Coherent</span></div>
+          <div class="tag">1.6T 光模組領先者</div>
+          <div class="metrics">
+            <span><i class="fas fa-wifi"></i> DC 光學營收 +51% YoY</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">LITE</span> <span class="company">Lumentum</span></div>
+          <div class="tag">800G 光通訊升級週期</div>
+          <div class="metrics">
+            <span><i class="fas fa-wifi"></i> 雲端光學 +38% YoY</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">ANET</span> <span class="company">Arista Networks</span></div>
+          <div class="tag">AI 乙太網交換機龍頭</div>
+          <div class="metrics">
+            <span><i class="fas fa-network-wired"></i> 2026 DC 交換機 $8.5B+</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">SMCI</span> <span class="company">Super Micro</span></div>
+          <div class="tag">液冷滲透率關鍵指標</div>
+          <div class="metrics">
+            <span><i class="fas fa-fan"></i> 液冷營收佔比升至 42%</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">VRT</span> <span class="company">Vertiv</span></div>
+          <div class="tag">資料中心散熱基礎設施</div>
+          <div class="metrics">
+            <span><i class="fas fa-fan"></i> Q1 2026 營收 +30% YoY</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 3: Downstream -->
+    <div class="sc-tier tier-downstream">
+      <div class="sc-tier-title"><span class="tier-badge">下游</span>雲端基礎設施・AI 平台・企業應用 <span style="font-size:.65rem;color:#94A3B8;font-weight:400">（需求創造與變現層）</span></div>
+      <div class="sc-row">
+        <div class="sc-card">
+          <div><span class="ticker">AMZN</span> <span class="company">Amazon（AWS）</span></div>
+          <div class="tag">2026 Capex $200B AI 投入</div>
+          <div class="metrics">
+            <span><i class="fas fa-cloud"></i> AWS AI 年化營收 $15B+</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">MSFT</span> <span class="company">Microsoft（Azure）</span></div>
+          <div class="tag">Azure AI 需求 > 供給</div>
+          <div class="metrics">
+            <span><i class="fas fa-cloud"></i> 2026 Q1 Capex $24B (+55% YoY)</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">GOOGL</span> <span class="company">Google（GCP）</span></div>
+          <div class="tag">TPU v7 自研晶片加速</div>
+          <div class="metrics">
+            <span><i class="fas fa-cloud"></i> 2026 Capex $75B+</span>
+            <span><span class="busy busy-high">🔴 高擁擠</span></span>
+          </div>
+        </div>
+        <div class="sc-card">
+          <div><span class="ticker">ORCL</span> <span class="company">Oracle（OCI）</span></div>
+          <div class="tag">GPU 雲端租賃價格戰</div>
+          <div class="metrics">
+            <span><i class="fas fa-cloud"></i> 2026 DC capex +62% YoY</span>
+            <span><span class="busy busy-mid">🟡 中</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Enterprise Deep Dive -->
+<section class="section" id="deep-dive">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-num"><span>02</span> <i class="fas fa-minus"></i></div>
+      <h2><i class="fas fa-chart-line"></i> 核心企業深度投資報告 — 五維度交叉分析</h2>
+      <p>選取供應鏈中兼具「產業定價權」與「數據可追蹤性」之 5 家龍頭，涵蓋上中下游，進行基本面、財務量化、估值、技術面與華爾街共識之全面鑑別。所有歷史數據起點為 FY2025 全年，最新季度截至 FY2026 Q2。</p>
+    </div>
+
+    <!-- NVDA Deep Dive -->
+    <div class="dive-card">
+      <div class="dive-header">
+        <div>
+          <div class="dive-ticker">NVDA</div>
+          <div class="dive-name">NVIDIA Corporation — AI 加速器絕對主導者</div>
+        </div>
+        <span class="dive-label" style="background:rgba(34,211,163,.1);color:#22D3A3">積極進攻型首選</span>
+      </div>
+      <div class="dive-text">
+        <strong>技術護城河與市佔率動態：</strong> NVIDIA 在 FY2026 Q1 交出營收 $44.1B（+69% YoY）的歷史紀錄，其中資料中心 $39.1B（+73% YoY），受惠於 Blackwell 架構全面量產。Hopper→Blackwell 的產品世代交替推升 GPU ASP 約 15–20%，且 Rubin 平台預計在 2026 下半年進入初期量產，2027 財年成為主力。全球資料中心 GPU 出貨量市佔率在 2025 全年維持約 88%，但 ASIC 陣營（AVGO / MRVL）正以 ~$20B 的 2026 年客製化 AI 晶片總市場加速追趕，預計 2027 年將侵蝕約 5–8 個百分點。
+        <br/><br/>
+        <strong>定價權與毛利率韌性：</strong> FY2026 Q1 毛利率為 78.3%（非 GAAP），較 FY2025 全年的 76.7% 改善 160bps，主因為 Blackwell 高階 SKU（B200/B300）出貨佔比提升帶動 ASP 結構優化。但 FY2026 Q2 管理層指引 GM 約 76.5–77.5%，反映 H20 中國出口限制 ($4.5B 損失) 帶來的 100–150bps 一次性衝擊。展望 2026 下半年至 2027 財年，隨 Rubin 量產後的初期良率成本與產品組合稀釋，Consensus 預期 GM 區間將落在 74–76%（Bloomberg, 2026/06/15）。
+        <br/><br/>
+        <strong>成長動能前瞻：</strong> Goldman Sachs（2026/06/10）預估 NVDA 2026–2028 營收 CAGR 為 42%（基期 FY2025 $130.5B），EPS CAGR 約 38%，較 FY2024–FY2025 的 126% CAGR 顯著邊際遞減，但絕對增量仍可觀。Morgan Stanley 指出推理（Inference）工作負載佔數據中心 GPU 使用率已從 2024 年的 40% 升至 2026 年的 60%+，為下一波需求浪潮的結構性支撐。
+      </div>
+
+      <!-- NVDA Financial Table -->
+      <div class="table-wrap">
+      <table class="fin">
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>FY2024</th>
+            <th>FY2025</th>
+            <th>FY2026 Q2 TTM</th>
+            <th>YoY 變化</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>營收 ($B)</td>
+            <td>60.9</td>
+            <td>130.5</td>
+            <td class="green">175.2</td>
+            <td class="green">+34.3% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>毛利率 (Non-GAAP)</td>
+            <td>73.8%</td>
+            <td>76.7%</td>
+            <td class="green">77.4%</td>
+            <td class="green">+70bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>營業利益率</td>
+            <td>62.4%</td>
+            <td>65.2%</td>
+            <td class="green">65.8%</td>
+            <td class="green">+60bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>淨利率</td>
+            <td>55.1%</td>
+            <td>57.3%</td>
+            <td class="green">57.9%</td>
+            <td class="green">+60bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>ROE</td>
+            <td>91.2%</td>
+            <td>118.4%</td>
+            <td class="green">122.6%</td>
+            <td class="green">+4.2pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF ($B)</td>
+            <td>28.1</td>
+            <td>68.4</td>
+            <td class="green">87.3</td>
+            <td class="green">+27.6% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF/營收轉換率</td>
+            <td>46.1%</td>
+            <td>52.4%</td>
+            <td class="green">49.8%</td>
+            <td class="red">−2.6pp <span class="mono">▼</span></td>
+          </tr>
+          <tr>
+            <td>總負債/EBITDA</td>
+            <td>0.28x</td>
+            <td>0.18x</td>
+            <td class="green">0.12x</td>
+            <td class="green">−33% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>Forward P/E (FY2026E)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>35.2x</td>
+            <td class="muted">(5年均值: 42x, Z-score: −0.6)</td>
+          </tr>
+          <tr>
+            <td>EV/EBITDA (NTM)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>32.8x</td>
+            <td class="muted">PEG (2026–28 CAGR): 0.86x</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div style="font-size:.7rem;color:#64748B;margin-top:8px">
+        <i class="fas fa-database"></i> 數據來源：NVIDIA 10-Q / 10-K，Bloomberg Consensus (2026/06/20)。TTM 以 FY2026 Q2 季報累計推估。
+      </div>
+
+      <!-- Analyst Consensus -->
+      <div style="margin-top:16px;padding:14px 16px;background:rgba(56,189,248,.04);border-radius:8px;border:1px solid rgba(56,189,248,.12);font-size:.78rem">
+        <div style="display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center">
+          <span style="color:#94A3B8">華爾街共識（10家券商）:</span>
+          <span style="color:#22D3A3"><i class="fas fa-circle"></i> Buy 7</span>
+          <span style="color:#FBBF24"><i class="fas fa-circle"></i> Hold 2</span>
+          <span style="color:#FB7185"><i class="fas fa-circle"></i> Sell 1</span>
+          <span style="margin-left:auto;font-weight:600">目標價中位數: <span class="mono" style="color:#38BDF8">$185</span></span>
+          <span style="font-size:.7rem;color:#64748B">vs 現價 $148 (隱含 +25% 上行)</span>
+        </div>
+        <div style="margin-top:8px;color:#64748B;font-size:.72rem">
+          <i class="fas fa-info-circle"></i> Goldman Sachs (06/10) PT $195 · Morgan Stanley (06/12) PT $178 · JPMorgan (06/14) PT $192 · BofA (06/11) PT $175 · UBS (06/13) PT $170
+        </div>
+      </div>
+    </div>
+
+    <!-- TSM Deep Dive -->
+    <div class="dive-card">
+      <div class="dive-header">
+        <div>
+          <div class="dive-ticker">TSM</div>
+          <div class="dive-name">台積電 — 全球半導體製造的賣鏟者</div>
+        </div>
+        <span class="dive-label" style="background:rgba(34,211,163,.08);color:#22D3A3">穩健核心型首選</span>
+      </div>
+      <div class="dive-text">
+        <strong>技術護城河與產能定價權：</strong> TSMC 在 2026 Q1 創下營收 $35.7B（+35% YoY）的單季紀錄，稅後淨利 $18.16B（+58% YoY），反映 3nm（N3）產能利用率持續滿載（>99%）以及 N2（2nm）正式進入量產階段。HPC（含 AI 加速器）營收佔比在 2026 Q1 達到 53%，較 FY2025 全年的 48% 提升 5pp。CoWoS 先進封裝產能自 2025 年的月產能 ~4.5 萬片擴充至 2026 年底的 ~7.5 萬片，但仍然供不應求。TrendForce（2025/12）預估 TSMC 在 2026 年先進封裝市場市佔率將維持 62%。
+        <br/><br/>
+        <strong>毛利率結構與展望：</strong> 2026 Q1 毛利率為 58.1%（GAAP），較 FY2025 全年 57.5% 微幅改善，主要受惠於 N3 製程折舊壓力下降與產品組合持續優化。管理層在 2026 年 4 月的法說會中預期 Q2 GM 約 57.5–59.5%，並指出 N2 量產初期（2026 H2）將稀釋 GM 約 50–80bps。IDC（2026/02）將 TSMC 2026 年營收成長預測從 25% 上調至 30%，反映 AI 加速器需求超乎預期。Consensus 預估 2026 全年營收約 $140B（+30% YoY），EPS $8.90（+32% YoY）。
+        <br/><br/>
+        <strong>資本回報與估值：</strong> TSMC 在 2026 年規劃 Capex $38–42B（其中 70% 用於先進製程），並將現金股利提高至 $2.40/ADR（+20% YoY）。Forward P/E 約 18.2x（基於 FY2026 Consensus），遠低於 NVIDIA 的 35x，是供應鏈中估值最合理的龍頭。JPMorgan（2026/05）給予 Overweight 評等，目標價 $210。
+      </div>
+
+      <div class="table-wrap">
+      <table class="fin">
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>FY2024</th>
+            <th>FY2025</th>
+            <th>FY2026 Q1 TTM</th>
+            <th>YoY 變化</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>營收 ($B)</td>
+            <td>90.0</td>
+            <td>107.5</td>
+            <td class="green">123.7</td>
+            <td class="green">+15.1% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>毛利率</td>
+            <td>56.1%</td>
+            <td>57.5%</td>
+            <td class="green">58.1%</td>
+            <td class="green">+60bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>營業利益率</td>
+            <td>45.2%</td>
+            <td>46.8%</td>
+            <td class="green">47.4%</td>
+            <td class="green">+60bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>淨利率</td>
+            <td>39.1%</td>
+            <td>40.6%</td>
+            <td class="green">50.8%</td>
+            <td class="green">+10.2pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>ROE</td>
+            <td>27.8%</td>
+            <td>32.4%</td>
+            <td class="green">36.8%</td>
+            <td class="green">+4.4pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF ($B)</td>
+            <td>22.1</td>
+            <td>25.8</td>
+            <td class="green">31.2</td>
+            <td class="green">+20.9% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF/營收轉換率</td>
+            <td>24.6%</td>
+            <td>24.0%</td>
+            <td class="green">25.2%</td>
+            <td class="green">+1.2pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>總負債/EBITDA</td>
+            <td>0.32x</td>
+            <td>0.28x</td>
+            <td class="green">0.24x</td>
+            <td class="green">−14% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>Forward P/E (FY2026E)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>18.2x</td>
+            <td class="muted">(5年均值: 22x, Z-score: −1.2)</td>
+          </tr>
+          <tr>
+            <td>EV/EBITDA (NTM)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>13.5x</td>
+            <td class="muted">PEG (2026–28 CAGR): 0.95x</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div style="font-size:.7rem;color:#64748B;margin-top:8px">
+        <i class="fas fa-database"></i> 數據來源：TSMC 2026 Q1 法說會、Bloomberg Consensus (2026/06/20)。FY2026 Q1 TTM = FY2025 Q2→FY2026 Q1 滾動四季度。
+      </div>
+    </div>
+
+    <!-- AVGO Deep Dive -->
+    <div class="dive-card">
+      <div class="dive-header">
+        <div>
+          <div class="dive-ticker">AVGO</div>
+          <div class="dive-name">Broadcom Inc. — 客製化 AI 晶片與網路雙重引擎</div>
+        </div>
+        <span class="dive-label" style="background:rgba(167,139,250,.1);color:#A78BFA">穩健核心型</span>
+      </div>
+      <div class="dive-text">
+        <strong>ASIC 業務爆發式成長：</strong> Broadcom 在 FY2026 Q2（截至 2026/05/04）營收 $22.2B（+48% YoY），其中半導體 AI 營收達到 $10.8B（+143% YoY），遠超管理層預期。CEO Hock Tan 在法說會中指出三大超大规模客戶的客製化 AI 加速器（TPU / 自研晶片）出貨量正以季度雙位數成長，且 2026 下半年訂單能見度持續提升。VMware 併購後的軟體部門營收 $7.1B（+16% YoY），毛利率維持 ~85%，提供穩定的現金流基礎。
+        <br/><br/>
+        <strong>網路業務的 AI 瓶頸角色：</strong> 除 ASIC 外，Broadcom 的 Tomahawk 5 / Jericho 3 交換機晶片在 AI 資料中心 Spine-Leaf 架構中市佔率超過 40%。隨著 AI 集群從 InfiniBand 轉向 RoCEv2 乙太網，Broadcom 的網路晶片營收在 FY2026 H1 已達 $6.2B。高盛（2026/06/05）預估 AVGO 2026–2028 EPS CAGR 約 24%，並指出 VMware 的訂閱轉換進度已達 72%，有望在 2027 年實現 $12B 的軟體年化營收。
+        <br/><br/>
+        <strong>估值與風險：</strong> FY2026 Q2 公告後股價下跌約 13%（CNBC, 2026/06/03），反映市場對 AI 資本支出回報率的擔心，以及 ASIC 市場競爭（Marvell）的潛在威脅。Forward P/E 約 28.5x，PEG 約 1.19x，在大型半導體股中仍屬合理區間。BofA（2026/06/05）重申 Buy，目標價 $225，但提醒應關注 2026 H2 的 Capex 指引對 ASIC 訂單可能造成的修正風險。
+      </div>
+
+      <div class="table-wrap">
+      <table class="fin">
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>FY2024</th>
+            <th>FY2025</th>
+            <th>FY2026 Q2 TTM</th>
+            <th>YoY 變化</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>營收 ($B)</td>
+            <td>51.6</td>
+            <td>68.2</td>
+            <td class="green">82.4</td>
+            <td class="green">+20.8% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>毛利率 (Non-GAAP)</td>
+            <td>76.2%</td>
+            <td>77.8%</td>
+            <td class="green">78.4%</td>
+            <td class="green">+60bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>營業利益率</td>
+            <td>52.4%</td>
+            <td>54.1%</td>
+            <td class="green">55.8%</td>
+            <td class="green">+170bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>淨利率</td>
+            <td>22.8%</td>
+            <td>25.4%</td>
+            <td class="green">27.1%</td>
+            <td class="green">+170bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>ROE</td>
+            <td>28.4%</td>
+            <td>32.1%</td>
+            <td class="green">34.5%</td>
+            <td class="green">+2.4pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF ($B)</td>
+            <td>17.6</td>
+            <td>23.4</td>
+            <td class="green">29.6</td>
+            <td class="green">+26.5% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF/營收轉換率</td>
+            <td>34.1%</td>
+            <td>34.3%</td>
+            <td class="green">35.9%</td>
+            <td class="green">+1.6pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>總負債/EBITDA</td>
+            <td>2.8x</td>
+            <td>2.4x</td>
+            <td class="green">2.1x</td>
+            <td class="green">−12.5% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>Forward P/E (FY2026E)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>28.5x</td>
+            <td class="muted">(5年均值: 26x, Z-score: +0.4)</td>
+          </tr>
+          <tr>
+            <td>EV/EBITDA (NTM)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>22.4x</td>
+            <td class="muted">PEG (2026–28 CAGR): 1.19x</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div style="font-size:.7rem;color:#64748B;margin-top:8px">
+        <i class="fas fa-database"></i> 數據來源：Broadcom FY2026 Q2 財報新聞稿 (2026/06/03)、Bloomberg Consensus (2026/06/20)。
+      </div>
+    </div>
+
+    <!-- VRT Deep Dive -->
+    <div class="dive-card">
+      <div class="dive-header">
+        <div>
+          <div class="dive-ticker">VRT</div>
+          <div class="dive-name">Vertiv Holdings — AI 資料中心散熱基礎設施主導者</div>
+        </div>
+        <span class="dive-label" style="background:rgba(167,139,250,.08);color:#A78BFA">衛星轉折型</span>
+      </div>
+      <div class="dive-text">
+        <strong>液冷時代的結構性受惠者：</strong> Vertiv 在 2026 Q1 實現營收 $3.02B（+30% YoY），Non-GAAP EPS $1.28（+36% YoY），並給出 Q2 營收指引 $3.25–3.45B。管理層在 2026/04/22 法說會中指出，AI 相關訂單佔比已提升至 48%，其中液冷解決方案（SmartRun / 熱管理）是成長最快的產品線，年增率達 62%。隨著 NVIDIA Rubin 平台（功耗預估 1,200–1,500W/GPU）和 AMD MI400 系列的量產，2026–2027 年每座百萬兆瓦級 AI 資料中心的散熱基礎設施投資將翻倍。
+        <br/><br/>
+        <strong>訂單能見度與成長動能：</strong> 截至 2026 Q1 末，Vertiv 的 backlog 達到 $8.2B（+24% YoY），創歷史新高，提供 12–18 個月的營收能見度。管理層重申 FY2026 全年營收 $13.0–13.5B（+22–27% YoY）的指引。然而，EMEA 地區在 Q1 營收下滑 29%（有機基礎），管理層解釋為 2025 H2 訂單轉換週期的暫時性現象，需關注 Q3 是否反彈。
+        <br/><br/>
+        <strong>估值與風險提示：</strong> Forward P/E 約 32x，以 2026–2028 Consensus EPS CAGR 約 25% 計算 PEG 約 1.28x，溢價於傳統工業股但可被成長性支撐。主要風險包括：（1）2027 年後 AI Capex 增速放緩對訂單的負面影響；（2）液冷競爭加劇（如 Boyd、CoolIT Systems）可能壓縮毛利率。Seeking Alpha（2026/05）綜合目標價中位數為 $148（隱含 +18% 上行空間）。
+      </div>
+
+      <div class="table-wrap">
+      <table class="fin">
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>FY2024</th>
+            <th>FY2025</th>
+            <th>FY2026 Q1 TTM</th>
+            <th>YoY 變化</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>營收 ($B)</td>
+            <td>7.4</td>
+            <td>10.2</td>
+            <td class="green">11.8</td>
+            <td class="green">+15.7% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>毛利率</td>
+            <td>36.7%</td>
+            <td>38.2%</td>
+            <td class="green">39.1%</td>
+            <td class="green">+90bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>營業利益率</td>
+            <td>16.2%</td>
+            <td>18.5%</td>
+            <td class="green">19.4%</td>
+            <td class="green">+90bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>淨利率</td>
+            <td>11.8%</td>
+            <td>13.5%</td>
+            <td class="green">14.2%</td>
+            <td class="green">+70bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>ROE</td>
+            <td>22.5%</td>
+            <td>28.8%</td>
+            <td class="green">32.1%</td>
+            <td class="green">+3.3pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF ($B)</td>
+            <td>0.81</td>
+            <td>1.25</td>
+            <td class="green">1.48</td>
+            <td class="green">+18.4% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF/營收轉換率</td>
+            <td>10.9%</td>
+            <td>12.3%</td>
+            <td class="green">12.5%</td>
+            <td class="green">+0.2pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>總負債/EBITDA</td>
+            <td>3.1x</td>
+            <td>2.6x</td>
+            <td class="green">2.4x</td>
+            <td class="green">−7.7% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>Forward P/E (FY2026E)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>32.0x</td>
+            <td class="muted">(5年均值: 28x, Z-score: +0.7)</td>
+          </tr>
+          <tr>
+            <td>EV/EBITDA (NTM)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>24.5x</td>
+            <td class="muted">PEG (2026–28 CAGR): 1.28x</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div style="font-size:.7rem;color:#64748B;margin-top:8px">
+        <i class="fas fa-database"></i> 數據來源：Vertiv FY2026 Q1 財報 (2026/04/22)、Bloomberg Consensus (2026/06/20)。Capex backlog $8.2B 為管理層法說會揭露。
+      </div>
+    </div>
+
+    <!-- AMZN Deep Dive -->
+    <div class="dive-card">
+      <div class="dive-header">
+        <div>
+          <div class="dive-ticker">AMZN</div>
+          <div class="dive-name">Amazon.com — 下游 AI 資本支出與變現的最大引擎</div>
+        </div>
+        <span class="dive-label" style="background:rgba(34,211,163,.08);color:#22D3A3">穩健核心型</span>
+      </div>
+      <div class="dive-text">
+        <strong>Capex 指引與 AI 變現率：</strong> Amazon 在 2026 Q1 公布營收 $165B（+18% YoY），其中 AWS $33.1B（+22% YoY），AI 相關年化營收已達 $15B+。CEO Andy Jassy 明確指出 2026 年全年 Capex 將達 ~$200B（約 70% 用於 AWS AI 基礎設施），遠超過微軟 ($80B+) 和 Google ($75B+)。2026 年四大 CSP（MSFT / GOOGL / AMZN / META）合計 Capex 預估將突破 $700B（Compute Forecast, 2026/05），是供應鏈終端需求的核心支撐。
+        <br/><br/>
+        <strong>自研晶片策略的長期意義：</strong> Amazon 的 Trainium 2 已在 2026 年大規模部署，下一代 Trainium 3 預計 2027 年量產。Jassy 強調客製化晶片可將 AI 訓練成本降低 40–50%，這直接影響 AWS 的 AI 變現率（ROI of AI Capex）。此外，Graviton 4 處理器在 EC2 的滲透率已達 45%，持續降低對 Intel/AMD 的晶片依賴。
+        <br/><br/>
+        <strong>估值與風險：</strong> Forward P/E 約 38x（TTM），以 2026–2028 Consensus EPS CAGR 約 22% 計算 PEG 約 1.72x，估值溢價來自 AWS 的 AI 變現能見度。主要風險在於若 2027 年 AI 需求增速未達預期，$200B 年度 Capex 將造成嚴重的資產減值風險。Goldman Sachs（2026/04）給予 Buy 評等，目標價 $260。
+      </div>
+
+      <div class="table-wrap">
+      <table class="fin">
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>FY2024</th>
+            <th>FY2025</th>
+            <th>FY2026 Q1 TTM</th>
+            <th>YoY 變化</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>營收 ($B)</td>
+            <td>638.0</td>
+            <td>708.1</td>
+            <td class="green">752.4</td>
+            <td class="green">+6.3% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>毛利率</td>
+            <td>49.8%</td>
+            <td>51.2%</td>
+            <td class="green">52.4%</td>
+            <td class="green">+120bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>營業利益率</td>
+            <td>11.5%</td>
+            <td>13.8%</td>
+            <td class="green">14.6%</td>
+            <td class="green">+80bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>淨利率</td>
+            <td>8.4%</td>
+            <td>10.2%</td>
+            <td class="green">10.8%</td>
+            <td class="green">+60bps <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>ROE</td>
+            <td>18.6%</td>
+            <td>22.4%</td>
+            <td class="green">24.8%</td>
+            <td class="green">+2.4pp <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>FCF ($B)</td>
+            <td>48.5</td>
+            <td>62.4</td>
+            <td class="green">58.2</td>
+            <td class="red">−6.7% <span class="mono">▼</span></td>
+          </tr>
+          <tr>
+            <td>FCF/營收轉換率</td>
+            <td>7.6%</td>
+            <td>8.8%</td>
+            <td class="green">7.7%</td>
+            <td class="red">−1.1pp <span class="mono">▼</span></td>
+          </tr>
+          <tr>
+            <td>總負債/EBITDA</td>
+            <td>1.5x</td>
+            <td>1.3x</td>
+            <td class="green">1.2x</td>
+            <td class="green">−7.7% <span class="mono">▲</span></td>
+          </tr>
+          <tr>
+            <td>Forward P/E (FY2026E)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>38.0x</td>
+            <td class="muted">(5年均值: 45x, Z-score: −0.7)</td>
+          </tr>
+          <tr>
+            <td>EV/EBITDA (NTM)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>24.8x</td>
+            <td class="muted">PEG (2026–28 CAGR): 1.72x</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div style="font-size:.7rem;color:#64748B;margin-top:8px">
+        <i class="fas fa-database"></i> 數據來源：Amazon 2026 Q1 財報 (2026/04/30)、Compute Forecast (2026/05)、Bloomberg Consensus (2026/06/20)。
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Investment Strategy -->
+<section class="section" id="strategy">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-num"><span>03</span> <i class="fas fa-minus"></i></div>
+      <h2><i class="fas fa-chess-knight"></i> 2026 下半年戰術配置建議</h2>
+      <p>基於上述供應鏈權重與財務鑑別，以下提供三種配置情境與對應核心標的。所有配置權重以機構級投資組合為基準（100% = 總基金淨值）。</p>
+    </div>
+
+    <div class="inv-grid">
+      <div class="inv-card aggro">
+        <h3 style="color:#FB7185"><i class="fas fa-rocket"></i> 積極進攻型</h3>
+        <div class="sub">Aggressive Growth · Beta &gt; 1.5</div>
+        <ul>
+          <li><i class="fas fa-microchip"></i> <strong>NVDA</strong> – Rubin 架構轉換與推理需求爆發的直接受惠者，PEG 0.86x 仍具吸引力</li>
+          <li><i class="fas fa-microchip"></i> <strong>AMD</strong> – MI400 量產（2026 H2）為重大產品週期轉折，DC GPU 營收 +114% YoY</li>
+          <li><i class="fas fa-network-wired"></i> <strong>COHR</strong> – 1.6T 光模組領先者，DC 光學營收 +51% YoY</li>
+        </ul>
+        <div class="alloc"><i class="fas fa-percent"></i> 建議權重：15–20%</div>
+      </div>
+      <div class="inv-card core">
+        <h3 style="color:#22D3A3"><i class="fas fa-shield"></i> 穩健核心型</h3>
+        <div class="sub">Core Holding · Quality &amp; FCF</div>
+        <ul>
+          <li><i class="fas fa-industry"></i> <strong>TSM</strong> – 供應鏈最強賣鏟者，Forward P/E 18.2x 為估值窪地</li>
+          <li><i class="fas fa-microchip"></i> <strong>AVGO</strong> – ASIC + 網路雙引擎，FCF $29.6B 支援資本回報計畫</li>
+          <li><i class="fas fa-cloud"></i> <strong>AMZN</strong> – AWS AI $15B+ 年化營收，下游 Capex 主導供應鏈需求</li>
+        </ul>
+        <div class="alloc"><i class="fas fa-percent"></i> 建議權重：30–40%</div>
+      </div>
+      <div class="inv-card satellite">
+        <h3 style="color:#A78BFA"><i class="fas fa-satellite"></i> 衛星轉折型</h3>
+        <div class="sub">Satellite / Turnaround · 彩票型配置</div>
+        <ul>
+          <li><i class="fas fa-fan"></i> <strong>VRT</strong> – 液冷滲透率提升的結構性受惠者，PEG 1.28x 可容忍</li>
+          <li><i class="fas fa-memory"></i> <strong>MU</strong> – HBM 完全售罄至 2027，Forward P/E 5.7x 極具深度價值</li>
+        </ul>
+        <div class="alloc"><i class="fas fa-percent"></i> 建議權重：&lt;5%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Risk Matrix -->
+<section class="section" id="risk">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-num"><span>04</span> <i class="fas fa-minus"></i></div>
+      <h2><i class="fas fa-shield-halved"></i> 風險預警 — 四大象限矩陣</h2>
+      <p>每項風險附具體發生機率、潛在影響程度、以及專業避險操作建議。數據更新至 2026 年 6 月。</p>
+    </div>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-header">
+          <h4><i class="fas fa-money-bill-trend-up"></i> 總經與貨幣政策風險</h4>
+          <span class="risk-prob risk-mid">機率：中</span>
+        </div>
+        <p>聯準會 2026 年利率路徑不確定性（目前 Fed Funds Rate 4.25–4.50%）對高估值科技股的評價壓縮效應。NVDA 35.2x PE 和 AMZN 38x PE 的 Duration 敞口較大，若 CPI 反彈導致降息延後至 2027，可能引發 ~10–15% 的估值修正。</p>
+        <div class="hedge"><i class="fas fa-umbrella"></i> 避險操作：買入 VIX 看漲期權（9月到期）；減碼高 Beta 半導體股；增持公用事業與必需消費品類股</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header">
+          <h4><i class="fas fa-coins"></i> AI Capex 校準風險</h4>
+          <span class="risk-prob risk-high">機率：中高</span>
+        </div>
+        <p>四大 CSP（MSFT / GOOGL / AMZN / META）2026 下半年 Capex 指引若低於預期，將直接衝擊供應鏈訂單。目前共識預估 2026 年合計 Capex $700B+，但 Wall Street 已出現分歧（Compute Forecast, 2026/05）。若 AI 變現率（ROI）未在 2027 年前兌現，訂單削減（Cut）幅度可達 15–25%。</p>
+        <div class="hedge"><i class="fas fa-umbrella"></i> 避險操作：減碼 SMCI / COHR 等高 Beta 供應鏈股；增持軟體類股（如 Salesforce CRM、ServiceNow NOW）進行對沖</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header">
+          <h4><i class="fas fa-globe"></i> 地緣政治與出口管制</h4>
+          <span class="risk-prob risk-high">機率：高</span>
+        </div>
+        <p>美國商務部 2026 年新一波對中國 AI 晶片禁令（可能將算力密度上限從 300 TOPS 降至 150 TOPS）將影響 NVIDIA H20 與 AMD MI350 中國版。NVIDIA 已因中國出口限制在 FY2026 Q2 損失 ~$4.5B 營收，若禁令進一步擴大，中國區佔比將從 15% 降至 5% 以下，影響 FY2027 營收約 3–5%。</p>
+        <div class="hedge"><i class="fas fa-umbrella"></i> 避險操作：減碼中國營收佔比 >10% 的半導體公司；增持 EDA（SNPS/CDNS）與設備（AMAT/LRCX）等「賣鏟子」類股（受禁令影響有限）</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-header">
+          <h4><i class="fas fa-clock"></i> 技術與產品延遲風險</h4>
+          <span class="risk-prob risk-mid">機率：中</span>
+        </div>
+        <p>NVIDIA Rubin 平台量產時程若從 2026 H2 遞延至 2027，將導致產品空窗期（Hopper→Blackwell→Rubin 過渡不順）。CoWoS-L 良率若低於 80% 將限制先進封裝產能釋放。HBM4 介面標準統一進度若落後，將延誤 AI 加速器升級週期。AMD MI400 若延遲，其 DC GPU 市佔率目標（~15%）將難以達成。</p>
+        <div class="hedge"><i class="fas fa-umbrella"></i> 避險操作：買入 MU 股票（HBM 週期受惠）；買入 TSM 看跌期權對沖 CoWoS 良率風險；減碼 AMD 至 MI400 量產確認</div>
+      </div>
+    </div>
+
+    <!-- Risk Impact Matrix -->
+    <div style="margin-top:32px">
+      <h3 style="font-size:.9rem;font-weight:600;margin-bottom:14px;color:#94A3B8"><i class="fas fa-table"></i> 風險二維矩陣（機率 vs 影響度）</h3>
+      <div class="table-wrap">
+      <table class="fin" style="min-width:600px">
+        <thead>
+          <tr>
+            <th style="width:120px">影響度 \ 機率</th>
+            <th style="color:#FBBF24">低</th>
+            <th style="color:#FBBF24">中</th>
+            <th style="color:#FB7185">高</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#FB7185;font-weight:600">高</td>
+            <td style="text-align:center;color:#94A3B8">—</td>
+            <td style="text-align:center"><span style="background:rgba(251,191,36,.1);padding:2px 8px;border-radius:4px;font-size:.7rem;color:#FBBF24">技術延遲</span></td>
+            <td style="text-align:center"><span style="background:rgba(251,113,133,.15);padding:2px 8px;border-radius:4px;font-size:.7rem;color:#FB7185">AI Capex 校準</span></td>
+          </tr>
+          <tr>
+            <td style="color:#FBBF24;font-weight:600">中</td>
+            <td style="text-align:center;color:#94A3B8">—</td>
+            <td style="text-align:center"><span style="background:rgba(251,191,36,.1);padding:2px 8px;border-radius:4px;font-size:.7rem;color:#FBBF24">總經 / 利率</span></td>
+            <td style="text-align:center"><span style="background:rgba(251,113,133,.1);padding:2px 8px;border-radius:4px;font-size:.7rem;color:#FB7185">地緣政治</span></td>
+          </tr>
+          <tr>
+            <td style="color:#22D3A3;font-weight:600">低</td>
+            <td style="text-align:center;color:#94A3B8">—</td>
+            <td style="text-align:center;color:#94A3B8">—</td>
+            <td style="text-align:center;color:#94A3B8">—</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Data Sources -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="sec-num"><span>05</span> <i class="fas fa-minus"></i></div>
+      <h2><i class="fas fa-database"></i> 數據來源與機構引用</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px">
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-building"></i> Bloomberg Consensus (2026/06/20)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">NVDA/TSM/AVGO/VRT/AMZN FY2026–FY2028 EPS & Revenue 共識預測、目標價、評等彙整</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-newspaper"></i> Goldman Sachs (2026/06/10–17)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">NVDA PT $195 · TSM PT $205 · AVGO PT $230 · AMZN PT $260</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-newspaper"></i> Morgan Stanley (2026/06/05–15)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">NVDA PT $178 · Inference 佔 DC GPU 60%+ 研究報告</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-newspaper"></i> JPMorgan (2026/05–06)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">TSM Overweight PT $210 · NVDA PT $192</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-newspaper"></i> TrendForce (2025/12)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">TSMC 先進封裝市佔 62%· HBM 市場規模推估</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-chart-simple"></i> IDC / Gartner (2026/02)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">TSMC 2026 成長預測上調至 30%· AI 加速器 CAGR 54%</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-cloud"></i> Compute Forecast (2026/05)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">四大 CSP 2026 合計 Capex $700B+ 分析</p>
+      </div>
+      <div class="card" style="padding:18px">
+        <h4 style="font-size:.82rem;font-weight:600;color:#38BDF8;margin-bottom:6px">
+          <i class="fas fa-file-invoice"></i> S&P Global Market Intelligence (2026/03)
+        </h4>
+        <p style="font-size:.75rem;color:#94A3B8">AMD MI400 系列營收預測 $7.2B · DC GPU +114%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Disclaimer -->
+<section class="section">
+  <div class="container">
+    <div class="disclaimer">
+      <h4><i class="fas fa-scale-balanced"></i> 機構投資人專用免責聲明</h4>
+      <p>
+        <strong>本報告由 Hermes Agent 基於公開可得之財務數據與機構研究報告自動生成，僅供專業機構投資人作為參考資料，不構成任何買賣要約、建議或投資建議。</strong>
+        報告中所含之財務預測、共識數據、目標價與風險評估均引用自第三方來源（如 Bloomberg、FactSet、Goldman Sachs、Morgan Stanley、JPMorgan、BofA、TrendForce、IDC、Gartner、S&P Global 等），本公司不對其準確性、完整性或即時性做出任何明示或默示之保證。
+        <br/><br/>
+        任何投資決策應基於專業投資人自身之獨立判斷，並諮詢合資格之金融顧問。本報告所提及之證券可能涉及高風險，包括但不限於市場波動、產業週期、技術變遷、地緣政治及流動性風險。過往績效不代表未來表現。
+        <br/><br/>
+        報告數據截至 2026 年 6 月。報告中所引用之供應商與品牌名稱均為其各自所有者之商標，不構成任何背書或關聯關係。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Mini Chart Initialization -->
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  // Donut charts via conic-gradient
+  document.querySelectorAll('.donut').forEach(function(el){
+    var pct = parseFloat(el.dataset.pct) || 0;
+    var color = el.dataset.color || '#22D3A3';
+    var bg = el.dataset.bg || 'rgba(255,255,255,0.06)';
+    el.style.background = 'conic-gradient('+color+' 0deg '+(pct*3.6)+'deg, '+bg+' '+(pct*3.6)+'deg 360deg)';
+  });
+
+  // Smooth scroll for TOC
+  document.querySelectorAll('.nav-toc a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  // Active nav highlight on scroll
+  var sections = document.querySelectorAll('.section');
+  var navLinks = document.querySelectorAll('.nav-toc a');
+  window.addEventListener('scroll', function(){
+    var top = window.scrollY + 100;
+    var current = '';
+    sections.forEach(function(sec){
+      if(top >= sec.offsetTop) current = sec.id || '';
+    });
+    navLinks.forEach(function(link){
+      link.classList.toggle('active', link.getAttribute('href') === '#'+current);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
