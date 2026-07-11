@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On the Meaning of Life — A Collection of Quotes</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #faf9f6;
+            --text: #2c2c2c;
+            --muted: #6b6b6b;
+            --accent: #8b6f47;
+            --card-bg: #ffffff;
+            --card-border: #e8e4dc;
+            --btn-bg: #2c2c2c;
+            --btn-text: #faf9f6;
+            --divider: #d4cfc4;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a18;
+                --text: #e6e4df;
+                --muted: #a09d94;
+                --accent: #c4a76c;
+                --card-bg: #242420;
+                --card-border: #3a3832;
+                --btn-bg: #e6e4df;
+                --btn-text: #1a1a18;
+                --divider: #3a3832;
+                --shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Hero ─────────────────────────── */
+        .hero {
+            text-align: center;
+            padding: 4rem 1.5rem 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+        }
+
+        .hero .subtitle {
+            font-style: italic;
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .hero .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--divider);
+            margin: 2rem auto 0;
+        }
+
+        /* ── Random Quote Feature ────────── */
+        .featured {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            max-width: 640px;
+            margin: 0 auto 2.5rem;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: opacity 0.3s ease;
+        }
+
+        .featured blockquote {
+            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            quotes: "\201C" "\201D";
+        }
+
+        .featured blockquote::before {
+            content: open-quote;
+            font-size: 2.5rem;
+            color: var(--accent);
+            line-height: 0;
+            vertical-align: -0.4em;
+            margin-right: 0.15em;
+        }
+
+        .featured .author {
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .featured .author::before {
+            content: "— ";
+        }
+
+        .btn-random {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.65rem 1.75rem;
+            font-family: "Georgia", serif;
+            font-size: 0.95rem;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.15s ease;
+        }
+
+        .btn-random:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        .btn-random:active {
+            transform: translateY(0);
+        }
+
+        /* ── Quote Grid ──────────────────── */
+        .quotes-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        .quotes-section h2 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: 0.04em;
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .quote-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .quote-card p {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .quote-card .author {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-style: italic;
+            border-top: 1px solid var(--card-border);
+            padding-top: 0.75rem;
+        }
+
+        /* ── Footer ──────────────────────── */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        /* ── Responsive ──────────────────── */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 2.5rem 1rem 1.5rem;
+            }
+
+            .featured {
+                margin: 0 1rem 2rem;
+                padding: 1.75rem 1.25rem;
+            }
+
+            .quotes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <header class="hero">
+        <h1>On the Meaning of Life</h1>
+        <p class="subtitle">
+            A curated collection of reflections from philosophers, writers, and thinkers across the ages.
+        </p>
+        <div class="divider"></div>
+    </header>
+
+    <!-- ═══════════ RANDOM QUOTE ═══════════ -->
+    <section class="featured" id="random-quote">
+        <blockquote id="quote-text"></blockquote>
+        <p class="author" id="quote-author"></p>
+        <button class="btn-random" id="btn-random" onclick="showRandomQuote()">
+            Show Another
+        </button>
+    </section>
+
+    <!-- ═══════════ ALL QUOTES ═══════════ -->
+    <section class="quotes-section">
+        <h2>The Collection</h2>
+        <div class="quotes-grid" id="quotes-grid"></div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer>
+        A quiet corner of the internet, hand-curated for reflection.
+    </footer>
+
+    <script>
+        const quotes = [
+            {
+                text: "The meaning of life is that it stops.",
+                author: "Franz Kafka"
+            },
+            {
+                text: "The unexamined life is not worth living.",
+                author: "Socrates"
+            },
+            {
+                text: "Life has no meaning. Each of us has meaning and we bring it to life. It is a waste to be asking the question when you are the answer.",
+                author: "Joseph Campbell"
+            },
+            {
+                text: "He who has a why to live can bear almost any how.",
+                author: "Friedrich Nietzsche"
+            },
+            {
+                text: "The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.",
+                author: "Ralph Waldo Emerson"
+            },
+            {
+                text: "Life is what happens when you're busy making other plans.",
+                author: "John Lennon"
+            },
+            {
+                text: "The meaning of life is to find your gift. The purpose of life is to give it away.",
+                author: "Pablo Picasso"
+            },
+            {
+                text: "The mystery of human existence lies not in just staying alive, but in finding something to live for.",
+                author: "Fyodor Dostoevsky"
+            },
+            {
+                text: "Man is nothing else but what he makes of himself.",
+                author: "Jean-Paul Sartre"
+            },
+            {
+                text: "The meaning of life is to give life meaning.",
+                author: "Viktor Frankl"
+            },
+            {
+                text: "To live is the rarest thing in the world. Most people exist, that is all.",
+                author: "Oscar Wilde"
+            },
+            {
+                text: "Life is really simple, but we insist on making it complicated.",
+                author: "Confucius"
+            },
+            {
+                text: "It is not length of life, but depth of life.",
+                author: "Ralph Waldo Emerson"
+            },
+            {
+                text: "The only way to deal with an unfree world is to become so absolutely free that your very existence is an act of rebellion.",
+                author: "Albert Camus"
+            },
+            {
+                text: "We are here to awaken from the illusion of our separateness.",
+                author: "Thich Nhat Hanh"
+            }
+        ];
+
+        function showRandomQuote() {
+            const idx = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[idx];
+            const textEl = document.getElementById('quote-text');
+            const authorEl = document.getElementById('quote-author');
+
+            textEl.style.opacity = '0';
+            authorEl.style.opacity = '0';
+
+            setTimeout(() => {
+                textEl.textContent = quote.text;
+                authorEl.textContent = quote.author;
+                textEl.style.opacity = '1';
+                authorEl.style.opacity = '1';
+            }, 200);
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('quotes-grid');
+            quotes.forEach(q => {
+                const card = document.createElement('div');
+                card.className = 'quote-card';
+                card.innerHTML = `<p>&ldquo;${q.text}&rdquo;</p><span class="author">${q.author}</span>`;
+                grid.appendChild(card);
+            });
+        }
+
+        // Init
+        showRandomQuote();
+        renderGrid();
+    </script>
+
+</body>
+</html>
